@@ -269,7 +269,7 @@ public class Algorithms_Dijsktra_Floyd_Ford_Topological extends JFrame {
 		press_floyd.setFocusable(false);
 		frame.getContentPane().add(press_floyd);
 		
-		press_topological = new JButton("Topological Search");
+		press_topological = new JButton("Topological Sort");
 		press_topological.setForeground(Color.BLACK);
 		press_topological.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		press_topological.setBackground(Color.LIGHT_GRAY);
