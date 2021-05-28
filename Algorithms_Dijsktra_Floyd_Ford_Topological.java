@@ -39,7 +39,7 @@ import java.io.IOException;
 
 
 @SuppressWarnings("serial")
-public class Algorithms_Dijsktra_Floyd_Ford_Topological extends JFrame {
+public class Project_Glanda_Darie_Teofil extends JFrame {
 
 	private static final int length = 100;
 	private static int cnt = 0;
@@ -189,11 +189,8 @@ public class Algorithms_Dijsktra_Floyd_Ford_Topological extends JFrame {
 	private static int clicked2 = 0;
 	
 	private static int starting_vertex_floyd = -404;
-	private static int  ending_vertex_floyd = -404;
 	private static int starting_vertex_bellman = -404;
 	private static int  ending_vertex_bellman = -404;
-	private static boolean check_click_one = false;
-	private static boolean check_click_two = false;
 	private static boolean check_click_one_ = false;
 	private static boolean check_click_two_ = false;
 	private static int position1 = -404;
@@ -201,12 +198,14 @@ public class Algorithms_Dijsktra_Floyd_Ford_Topological extends JFrame {
 	private static int clicked3 = 0;
 	private static int clicked4 = 0;
 	
+	private JFrame frame_floyd;
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Algorithms_Dijsktra_Floyd_Ford_Topological window = new Algorithms_Dijsktra_Floyd_Ford_Topological();
+					Project_Glanda_Darie_Teofil window = new Project_Glanda_Darie_Teofil();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -215,7 +214,7 @@ public class Algorithms_Dijsktra_Floyd_Ford_Topological extends JFrame {
 		});
 	}
 	
-	public Algorithms_Dijsktra_Floyd_Ford_Topological () {
+	public Project_Glanda_Darie_Teofil () {
 		initialize();
 	}
 	
@@ -261,6 +260,7 @@ public class Algorithms_Dijsktra_Floyd_Ford_Topological extends JFrame {
 		}
 
 		frame = new JFrame("Glanda Darie Teofil PS1");
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 716, 767);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -502,7 +502,7 @@ public class Algorithms_Dijsktra_Floyd_Ford_Topological extends JFrame {
 		//WHEN CLCIKED FIND SHORTEST PATH USING BELLMAN FORD'S ALGORITHM
 		press_ford.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setLabel_bellman_ford(Color.blue,"Click on the start vertex!");
+				setLabel_bellman_ford(Color.blue,"Click on any vertex to display Floyd's Algorithm!");
 				panel_for_dots.removeMouseListener(click);
 				panel_for_dots.removeMouseListener(click_delete);
 				panel_for_dots.removeMouseListener(click_edges);
@@ -1366,7 +1366,7 @@ protected class Click_for_edges extends MouseAdapter {
 									}
 								}
 							}
-					System.out.print(vertexA);
+					//System.out.print(vertexA);
 					array_pair[iter1] = vertexA;
 					iter1 += 1;
 					
@@ -1397,7 +1397,7 @@ protected class Click_for_edges extends MouseAdapter {
 									}
 								}
 							}
-					System.out.print(vertexB);
+					//System.out.print(vertexB);
 					array_not_pair[iter2] = vertexB;
 					iter2 += 1;
 					
@@ -1740,12 +1740,12 @@ protected class Display_adjacency_matrix extends MouseAdapter {
 					
 					for(int i=0;i<count;++i) {
 							global_x  = 0;
-							matrix_labels[i][0] = new JLabel(String.valueOf(matrix_edges[i][0]+ "  "));
-							matrix_labels[i][0].setFont(new Font("Tahoma", Font.PLAIN, 14));
-							matrix_labels[i][0].setBounds(global_x+30,70+global_y, 221,21);
 							if(static_var >= 1) {
 								global_y += 60;
 							}
+							matrix_labels[i][0] = new JLabel(String.valueOf(matrix_edges[i][0]+ "  "));
+							matrix_labels[i][0].setFont(new Font("Tahoma", Font.PLAIN, 14));
+							matrix_labels[i][0].setBounds(global_x+30,70+global_y, 221,21);
 							static_var += 1;
 						for(int j=0;j<count;++j) {
 							 global_x += 70;
@@ -2072,53 +2072,8 @@ protected class Floyd_Warshall extends MouseAdapter {
 		super();
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	//@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void mouseClicked(MouseEvent event) {
-		if(clicked2 == 1) {
-			
-			int sourceVertex_coordx = event.getX() + 15/2;
-			int souceVertex_coordy = event.getY() + 15/2;
-			
-			for(n=0;n<dotList.size();n++) {
-				int some_x = dotList.get(n).getX() + 15/2;
-				int some_y = dotList.get(n).getY() + 15/2;
-			
-				
-			if(((sourceVertex_coordx <= some_x + 11) && (sourceVertex_coordx >= some_x - 11)) && ((souceVertex_coordy <= some_y + 11) && (souceVertex_coordy >= some_y - 11))) {
-				dotList.get(n).setColor(Color.blue);
-				repaint();
-				
-				ending_vertex_floyd = (int) dotList.get(n).getVertexInt(); //getting the source node from the panel 
-				break;
-				}
-			}
-			
-			if(ending_vertex_floyd == -404) {
-				JOptionPane.showMessageDialog(null, "Could not find the normal starting vertex!","ERROR 404", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			
-			position2 = -404;
-			
-			
-			for(int i=0;i<dotList.size();++i) {
-				if(ending_vertex_floyd == array_vertices[i]) {
-					position2 = i;
-					break;
-				}
-				continue;
-			}
-			
-			if(position2 == -404) {
-				JOptionPane.showMessageDialog(null, "Could not find the normal starting vertex!","ERROR 404", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-		
-			clicked2 += 1;
-			check_click_two = true;
-		
-		}
-		
 		if(clicked2 == 0) {
 		
 			int sourceVertex_coordx = event.getX() + 15/2;
@@ -2131,7 +2086,7 @@ protected class Floyd_Warshall extends MouseAdapter {
 			
 				
 			if(((sourceVertex_coordx <= some_x + 11) && (sourceVertex_coordx >= some_x - 11)) && ((souceVertex_coordy <= some_y + 11) && (souceVertex_coordy >= some_y - 11))) {
-				dotList.get(n).setColor(Color.blue);
+				dotList.get(n).setColor(Color.black);
 				repaint();
 				
 				starting_vertex_floyd = (int) dotList.get(n).getVertexInt(); //getting the source node from the panel 
@@ -2159,40 +2114,37 @@ protected class Floyd_Warshall extends MouseAdapter {
 				JOptionPane.showMessageDialog(null, "Could not find the normal starting vertex!","ERROR 404", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			
-			
-			clicked2 += 1;
-			check_click_one = true;
-			
-			setLabel_floyd_warshall(Color.blue,"Click on the destination vertex!");
-			
-		}
-			
-		if(check_click_one == true && check_click_two == true) {
+		} 
 				
 			int [][] distance_matrix = new int [dotList.size()][dotList.size()];
 			int [][] parent_matrix = new int [dotList.size()][dotList.size()];
-			ArrayList<Integer> shortest_path = new ArrayList<Integer>();
 				
 			int len = dotList.size();
-		
+			int infinity = 9999;
+			
 			for(int i=0;i<len;i++) {
 				for(int j=0;j<len;j++) {
 					if(i == j) {
 						distance_matrix[i][j] = 0;
 					} else {
-						distance_matrix[i][j] = matrix_edges[i][j];
+						if(matrix_edges[i][j] == -1) {
+							distance_matrix[i][j] = infinity;
+						}
+						else {
+							distance_matrix[i][j] = matrix_edges[i][j];
+						}
 					}
 						parent_matrix[i][j] = j;
 						parent_matrix[j][i] = i;
 				}
 			}
+			
 				long start = System.nanoTime();
 				
 				for(int k=0;k<len;k++) {
 					for(int i=0;i<len;i++) {
 						for(int j=0;j<len;j++) {
-							if(distance_matrix[i][k] == -1 || distance_matrix[k][j] == -1) {
+							if(distance_matrix[i][k] == infinity || distance_matrix[k][j] == infinity) {
 								continue;
 							}
 							if(distance_matrix[i][j] > (distance_matrix[i][k] + distance_matrix[k][j])) {
@@ -2202,49 +2154,176 @@ protected class Floyd_Warshall extends MouseAdapter {
 					}
 				}
 			}
-				long end = System.nanoTime();
-				
-				System.out.print("\n");
-				for(int i=0;i<len;++i) {
-					for(int j=0;j<len;++j) {
-						System.out.print(parent_matrix[i][j]+ " ");
-					}
-					System.out.print("\n");
-				}
+			long end = System.nanoTime();
 				
 			next_time = 1;
 			time_array[next_time] = (int) (end-start);
+				
+			setLabel_floyd_warshall(Color.blue,"Elapsed time for Floyd Warshall's algorithm : " +time_array[next_time]+ " nanoseconds");
 			
+			sleep = new SLEEP(1000);
+			sleep.method_sleep();
 			
-			int shortest_path_floyd_warshall = 0;
+			frame_floyd = new JFrame("Floyd Warshall's algorithm");
+			frame_floyd.setBounds(80, 80, 650, 650);
+			frame_floyd.setResizable(false);
+			frame_floyd.getContentPane().setBackground(Color.white);
+			frame_floyd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame_floyd.getContentPane().setLayout(null);
+			frame_floyd.setVisible(true);
 			
+			counter1 = 0;
+			counter2 = 0;
+			global_x = 0;
+			global_y = 0;
+			next_line_row = 0;
+			next_line = 0;
+			static_var = 0;
 			
-			int currentVertex = position2;  
-			int nextVertex = parent_matrix[position1][position2];
+			JLabel [][] distance_matrix_labels = new JLabel[count][count];
+			JLabel [] label_line_row = new JLabel [155];
+			JLabel [] label_line_row_up = new JLabel [155];
+			JLabel [] label_line_column = new JLabel [33];
+			JLabel [] label_line_column_up = new JLabel [33];
+	
 			
-			shortest_path.add(currentVertex);
-		    while(currentVertex != nextVertex) {
-		      currentVertex = nextVertex;
-		      shortest_path.add(0,currentVertex);
-		      nextVertex = parent_matrix[position1][nextVertex];
-		    }
-		    shortest_path.add(0,position1);
-		    shortest_path.add(distance_matrix[position1][position2]);
-		    
-		    Integer[] shortest_path_array = new Integer[shortest_path.size()];
-		    shortest_path_array = shortest_path.toArray(shortest_path_array);
-		    
-		    
-			for(int i=0;i<shortest_path_array.length;++i) {
-					shortest_path_floyd_warshall += distance_matrix[shortest_path_array[i]][i];
-					edgeList.get(i).setColor(Color.blue);
+			JLabel floyd_label = new JLabel("Floyd Warshall matrix");
+			floyd_label.setFont(new Font("Tahoma", Font.BOLD, 20));
+			floyd_label.setBounds(200, 20, 270, 21);
+			floyd_label.setForeground(Color.black);
+			frame_floyd.add(floyd_label);
+			
+			int hold_value_of_first_global_x = 404;
+			int hold_value_of_first_global_y = 404;
+			
+			JLabel [] list_labels = new JLabel [count];
+			JLabel [] list_label_columns = new JLabel [count];
+			
+			for(int i=0;i<count;++i) {
+				global_x += 70;
+				if(counter1 == 0) {
+					hold_value_of_first_global_x = global_x;
+					counter1 += 1;
+				}
+				list_labels[i] = new JLabel(String.valueOf(array_vertices[i]+"  "));
+				list_labels[i].setFont(new Font("Tahoma", Font.PLAIN, 14));
+				list_labels[i].setBounds(global_x+30, 70, 221,21);
+				list_labels[i].setForeground(Color.black);
 			}
 			
-			JLabel floyd_label = new JLabel("        Shortest Path for Floyd Warshall is: "+ shortest_path_floyd_warshall+ "!");
-			floyd_label.setForeground(Color.blue);
-			panel_for_dots.add(floyd_label);
+
+			for(int i=0;i<155;++i) {
+				label_line_row_up[i] = new JLabel("-");
+				label_line_row_up[i].setFont(new Font("Tahoma", Font.PLAIN, 14));
+				label_line_row_up[i].setBounds((hold_value_of_first_global_x-25+next_line_row), 70-15, 221, 21);
+				label_line_row_up[i].setForeground(Color.black);
+				next_line_row += 3;
+			}
 			
-			setLabel_floyd_warshall(Color.blue,"Elapsed time for Floyd Warshall's algorithm : " +time_array[next_time]+ " nanoseconds");
+			next_line_row = 0;
+			
+			for(int i=0;i<155;++i) {
+				label_line_row[i] = new JLabel("-");
+				label_line_row[i].setFont(new Font("Tahoma", Font.PLAIN, 14));
+				label_line_row[i].setBounds((hold_value_of_first_global_x-25+next_line_row), 70+20, 221, 21);
+				label_line_row[i].setForeground(Color.black);
+				next_line_row += 3;
+			}
+			
+			for(int i=0;i<count;++i) {
+				global_y += 60;
+				if(counter2 == 0) {
+					counter2 += 1;
+					hold_value_of_first_global_y = global_y;
+				}
+				list_label_columns[i] = new JLabel(String.valueOf(array_vertices[i]+"  "));
+				list_label_columns[i].setFont(new Font("Tahoma", Font.PLAIN, 14));
+				list_label_columns[i].setBounds(50+5, global_y+50,221,21);
+				list_label_columns[i].setForeground(Color.black);
+			}
+			
+			for(int i=0;i<33;++i) {
+				label_line_column[i] = new JLabel("|");
+				label_line_column[i].setFont(new Font("Tahoma", Font.PLAIN, 14));
+				label_line_column[i].setBounds(75, hold_value_of_first_global_y+next_line+1, 221,21);
+				label_line_column[i].setForeground(Color.black);
+				next_line += 12;
+			}
+			
+			next_line = 0;
+			
+			for(int i=0;i<33;++i) {
+				label_line_column_up[i] = new JLabel("|");
+				label_line_column_up[i].setFont(new Font("Tahoma", Font.PLAIN, 14));
+				label_line_column_up[i].setBounds(45, hold_value_of_first_global_y+next_line+1, 221,21);
+				label_line_column_up[i].setForeground(Color.black);
+				next_line += 12;
+			}
+			
+			global_y = 0;
+			
+			for(int i=0;i<count;++i) {
+					global_x  = 0;
+					if(static_var >= 1) {
+						global_y += 60;
+					}
+					distance_matrix_labels[i][0] = new JLabel(String.valueOf(distance_matrix[i][0]+ "  "));
+					distance_matrix_labels[i][0].setFont(new Font("Tahoma", Font.PLAIN, 14));
+					distance_matrix_labels[i][0].setBounds(global_x+30,70+global_y, 221,21);
+					static_var += 1;
+				for(int j=0;j<count;++j) {
+					 global_x += 70;
+					 distance_matrix_labels[i][j] = new JLabel(String.valueOf(distance_matrix[i][j]+ "  "));
+					 distance_matrix_labels[i][j].setFont(new Font("Tahoma", Font.PLAIN, 14));
+					 if(distance_matrix[i][j] == 9999 || distance_matrix[i][j] == -1 || distance_matrix[i][j] == 0) {
+						 distance_matrix_labels[i][j].setBounds(global_x+30, 109+global_y, 221,21);
+						 distance_matrix_labels[i][j].setForeground(Color.red);
+					 } else {
+						 distance_matrix_labels[i][j].setBounds(global_x+30, 109+global_y, 221,21);
+						 distance_matrix_labels[i][j].setForeground(Color.black);
+					 }
+				}
+			}
+			
+			JPanel panel_graph = new JPanel();
+			panel_graph.setBounds(48, 67, 30, 35);
+			panel_graph.setBackground(Color.black);
+			frame_floyd.add(panel_graph);
+			panel_graph.setLayout(null);
+			
+			JPanel one_more_panel = new JPanel();
+			
+			one_more_panel.setBounds(400, 400, 160, 60);
+			
+			
+			JLabel photo = new JLabel();
+			ImageIcon imageIcon = new ImageIcon("C:\\Users\\darie\\eclipse-workspace\\Glanda_Darie_Teofil_proiect_PS1_JAVA\\src\\bloggif_60843a321f4c0.gif");
+			photo = new JLabel(imageIcon);
+			photo.setBounds(475, 515, 160, 100);
+			frame_floyd.add(photo);
+			
+			for(int i=0;i<count;++i) {
+				frame_floyd.add(list_labels[i]);
+			}
+			
+			for(int i=0;i<count;++i) {
+				frame_floyd.add(list_label_columns[i]);
+			}
+			
+			for(int i=0;i<155;++i) {
+				frame_floyd.add(label_line_row[i]);
+				frame_floyd.add(label_line_row_up[i]);
+			}
+			
+			for(int i=0;i<33;++i) {
+				frame_floyd.add(label_line_column[i]);
+				frame_floyd.add(label_line_column_up[i]);
+			}
+			
+			for(int i=0;i<count;++i) {
+				for(int j=0;j<count;++j) {
+					frame_floyd.add(distance_matrix_labels[i][j]);
+			}
 		}
 	}
 }
@@ -2440,35 +2519,67 @@ protected class Bellman_Ford extends MouseAdapter {
 			Arrays.fill(checked_array, -1);
 			int iterator = 0;
 			
-			
 			int new_len = parent_arr.length;
 			
+			boolean flag = false;
+			boolean first_vertex_all_found = true;
+			
 			for(int i=1;i<new_len;++i) {
-				for(int j=1;j<new_len;++j) {
-					if(parent_arr[i] == parent_arr[j] && i != j) {
-						parent_arr[i+1] = -404;
-					}
-				}
+				if(parent_arr[i] != 0) {
+					first_vertex_all_found = false;
+					break;
+				} 
+				continue;
 			}
 			
-			
-			for(int i=0;i<len_edges;++i) {
-				for(int j=1;j<len_vertices;++j) {
-				iterator = 0;
-				if(parent_arr[j] != -404) {
-					if(check_matrix[parent_arr[j]][j] == edgeList.get(i).getWeight2()) {
-						if(checked_array[iterator] != edgeList.get(i).getWeight2()) {
-							checked_array[iterator] = edgeList.get(i).getWeight2();
-							shortest_path_bellman_ford += edgeList.get(i).getWeight2();
-							edgeList.get(i).setColor(Color.blue);	
-						} else {
-							iterator += 1;
+			if(first_vertex_all_found == false) {
+				
+					for(int i=1;(i<new_len) && (flag == false);++i) {
+						for(int j=i+1;(j<new_len) && (flag == false);++j) {
+							if(parent_arr[i] == parent_arr[j]) {
+								flag = true;
+							}
+						}
+					}
+				if(flag == true) {
+					for(int i=1;i<new_len;++i) {
+						for(int j=1;j<new_len;++j) {
+							if(parent_arr[i] == parent_arr[j] && i != j) {
+								parent_arr[i+1] = -404;
 							}
 						}
 					}
 				}
+				
+				
+				for(int i=0;i<len_edges;++i) {
+					for(int j=1;j<len_vertices;++j) {
+					iterator = 0;
+					if(parent_arr[j] != -404) {
+						if(check_matrix[parent_arr[j]][j] == edgeList.get(i).getWeight2()) {
+							if(checked_array[iterator] != edgeList.get(i).getWeight2()) {
+								checked_array[iterator] = edgeList.get(i).getWeight2();
+								shortest_path_bellman_ford += edgeList.get(i).getWeight2();
+								edgeList.get(i).setColor(Color.blue);	
+							} else {
+								iterator += 1;
+									}
+								}
+							}
+						}
+					}
+				} else if(first_vertex_all_found == true) {
+					int edgeListSize = edgeList.size();
+					for(int i=0;i<edgeListSize;++i) {
+						for(int j=1;j<parent_arr.length;++j) {
+							if(edgeList.get(i).getWeight2() ==  matrix_edges[parent_arr[j]][j]) {
+								edgeList.get(i).setColor(Color.blue);
+								shortest_path_bellman_ford +=  matrix_edges[parent_arr[j]][j];
+						}
+					}
+				}
 			}
-			
+		
 			next_time = 2;
 			time_array[next_time] = (int) (end-start);
 			
@@ -2628,8 +2739,6 @@ protected class Panel_for_dots extends JPanel {
 	public void INSERT_DOTS(Create_Circle node, int vertex) {
 		if(SEE_IF_GRAPH_IS_FULL() == true) {
 			JOptionPane.showMessageDialog(null, "Graph is full!\n","ERROR 404", JOptionPane.ERROR_MESSAGE);
-			System.out.print("FULL GRAPH!");
-			System.out.print("\n");
 			check_function = false;
 			read_insert_vertex.setText("");
 			return;
@@ -2639,7 +2748,6 @@ protected class Panel_for_dots extends JPanel {
 		for(int i=0;i<length;i++) {
 			if(array_vertices[i] == vertex) {
 				JOptionPane.showMessageDialog(null, "Found a duplicate in the array!","ERROR 404", JOptionPane.ERROR_MESSAGE);
-				System.out.print("WE FOUND A DUPLICATE IN THE ARRAY!\n");
 				check_function = false;
 				read_insert_vertex.setText("");
 				return;
@@ -2667,10 +2775,8 @@ protected class Panel_for_dots extends JPanel {
 				
 				check_function = true;
 				JOptionPane.showMessageDialog(null, "Vertex " +vertex+ " was inserted with success!");
-				System.out.print("INSERTED VERTEX " +vertex+ " WITH SUCCESS!\n");
 				}
 			else {
-				System.out.print("SOME ERROR OCCURED!\n");
 				JOptionPane.showMessageDialog(null, "Error 404");
 		}
 	}
@@ -2719,10 +2825,6 @@ protected class Panel_for_dots extends JPanel {
 					weights[j] = edgeList.get(j).getWeight2();
 				}
 			}
-			System.out.print("\n");
-			for(int j=0;j<edgeList.size();++j) {
-				System.out.print(weights[j]+ " ");
-			}
 			
 			int new_len = edgeList.size();
 			
@@ -2754,19 +2856,6 @@ protected class Panel_for_dots extends JPanel {
 		count_Arr1AndArr2 = count_edges_arr1+count_edges_arr2;
 		iter1 -= count_Arr1AndArr2;
 		iter2 -= count_Arr1AndArr2;
-		System.out.print("\n");
-		
-		for(int j=0;j<edgeList.size();++j) {
-			System.out.print(array_pair[j]+ " ");
-		}
-		
-		System.out.print("\n");
-		
-		for(int j=0;j<edgeList.size();++j) {
-			System.out.print(array_not_pair[j]+ " ");
-		}
-		
-		System.out.print("\n");
 		
 			//delete din matrix liniia
 			for(int i=position;i<count-1;++i) {
@@ -2791,8 +2880,6 @@ protected class Panel_for_dots extends JPanel {
 		dotList.delete(position);
 		count_matrix_edges -= 2;
 		JOptionPane.showMessageDialog(null, "We deleted vertex " +vertex+ " with success!");
-		System.out.print("SUCCESSFULLY DELETED " +vertex+ "!");
-		System.out.print("\n");
 	}
 	
 	public void INSERT_EDGE(int vertexA, int vertexB, int weight) {
@@ -2823,7 +2910,6 @@ protected class Panel_for_dots extends JPanel {
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Exception " +e+ " made the error!","ERROR 404", JOptionPane.ERROR_MESSAGE);
-			System.out.print("ERROR 404!");
 		}
 		
 		
@@ -2840,7 +2926,6 @@ protected class Panel_for_dots extends JPanel {
 				matrix_edges[positionB][positionA] = weight;
 				count_matrix_edges += 2;
 				JOptionPane.showMessageDialog(null, "Vertex " +vertexB+ " and " +"vertex " +vertexA+ " have weight " +weight+ "!");
-				System.out.print("SUCCESSFULLY INSERTED WEIGHT " +weight+ " FOR VERTEX A AND VERTEX B!");
 		} else {
 			JOptionPane.showMessageDialog(null, "Can't add edges!","ERROR 404", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -2962,6 +3047,4 @@ protected class Panel_for_dots extends JPanel {
 		}
 	}
 }
-
-
 
